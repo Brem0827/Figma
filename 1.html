@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 13주차 문제1 </title>
+</head>
+<body>
+    <script>
+        const num = parseInt(prompt("입장객수를 입력해주세요"));
+        const seat = parseInt(prompt("한 줄에 앉을 좌석 수를 입력해주세요"));
+
+        const needRows = num % seat === 0 ?  num / seat : num / seat + 1;
+
+        document.write('<table border="1">');
+
+        if(num && seat){
+            for(let nowRow = 0 ; nowRow < needRows; i++){
+                document.write('<tr>');
+                
+                makeRowSeat(nowRow);
+
+                const loginUser = callApi();
+                document.getElementById('user_name').innerText = loginUser.name;
+
+
+                document.write('</tr>');
+            }
+        } else {
+            alert("값을 잘못 입력하셨습니다.");
+        }
+
+        function callApi(){
+            return fetch("https://naver.com/login"); // 비동기로 동작
+        }
+
+        function makeRowSeat(nowRow){
+            for(let x = 1; x <= seat; x++){
+                const seatNo = nowRow * seat + x;
+                if(seatNo > num) break;
+
+                document.write('<td> 좌석' + seatNo + '</td>')
+            }
+        }
+
+        document.write('</table>');
+    </script>
+</body>
+</html>
